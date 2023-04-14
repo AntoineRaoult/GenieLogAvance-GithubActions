@@ -11,11 +11,14 @@ jobs:
     - name : checkout
       uses: actions/checkout@v2
     - name: before_script
-      run : curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
-    - run : pnpm config set store-dir .pnpm-store
+      run : 
+        curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
+        pnpm config set store-dir .pnpm-store
     - name: install
-      run : pnpm install
+      run : 
+        pnpm install
     - name: build
-      run: pnpm run build
+      run: 
+        pnpm run build
   
   
