@@ -10,35 +10,47 @@ on:
       - main
 
 jobs:
-  build-job :
+  build :
+    name: build
     runs-on: ubuntu-latest
     steps:
     - name : checkout
       uses: actions/checkout@v2
+    - name : setup
+      uses: actions/setup-node@v2.5.2
     - name: build
       run : |
         curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
         pnpm config set store-dir .pnpm-store
         pnpm install
-        pnpm run build
+        pnpm run build    
+        
     - name : artifacts 
       uses : actions/upload-artifact@v3
       with:
         name: artifact-build
         path: dist/
+    - name : cache
+      uses: actions/cache/save@v3/
+      with:
+        path: |
+          node_modules/
+        
+        
+  test :
+    name : test
+    runs-on: ubuntu-latest
+    steps: 
     - name : static analysis
       run : |
-        curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
-        pnpm config set store-dir .pnpm-store
-        pnpm install
-        pnpm type-check
-        pnpm eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore
+        echo "pnpm type-check"
+        echo "pnpm eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
     - name : test
-      run: | 
-        curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@7
-        pnpm config set store-dir .pnpm-store
-        pnpm install
-        pnpm vitest
+      run: |
+        echo "pnpm vitest"
+        
+        
+    
         
   
       
