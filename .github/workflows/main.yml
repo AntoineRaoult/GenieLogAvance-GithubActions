@@ -65,8 +65,8 @@ jobs:
       with:
         skip_app_build: true
         action: upload 
-        azure_static_web_apps_api_token: $AZURE_QA_DEPLOY_TOKEN
-        app_artifact_location: /dist
+        azure_static_web_apps_api_token: ${{ secrets.AZURE_QA_DEPLOY_TOKEN }}
+        app_artifact_location: dist/
         
         
     
