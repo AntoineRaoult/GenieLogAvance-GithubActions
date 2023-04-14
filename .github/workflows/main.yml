@@ -1,0 +1,17 @@
+name: Build Vue
+on: 
+  push :
+    branches :
+      - lab9
+      - main
+jobs:
+  build :
+    runs-on: ubuntu-latest
+    name: Build Vue
+    steps:
+    - uses: actions/checkout@v2
+    - id: Build_Vue
+    - run : pnpm install
+    - run: pnpm run build
+  
+  
