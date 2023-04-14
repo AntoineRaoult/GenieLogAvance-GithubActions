@@ -56,6 +56,8 @@ jobs:
     name : deploy
     runs-on: ubuntu-latest
     steps: 
+    - name: qa
+      run : echo $AZURE_QA_DEPLOY_TOKEN
     - name : deploy qa
       uses: Azure/static-web-apps-deploy@v1
       with:
