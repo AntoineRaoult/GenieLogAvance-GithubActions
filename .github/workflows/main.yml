@@ -42,6 +42,7 @@ jobs:
         
   test :
     name : test
+    needs : build
     runs-on: ubuntu-latest
     steps: 
     - name : static analysis
@@ -54,6 +55,7 @@ jobs:
         
   deploy :
     name : deploy
+    needs : build 
     runs-on: ubuntu-latest
     steps: 
     - name: qa
@@ -61,7 +63,11 @@ jobs:
     - name : deploy qa
       uses: Azure/static-web-apps-deploy@v1
       with:
+        skip_app_build: true
+        action: upload 
         azure_static_web_apps_api_token: $AZURE_QA_DEPLOY_TOKEN
+        app_artifact_location: /dist
+        
         
     
         
