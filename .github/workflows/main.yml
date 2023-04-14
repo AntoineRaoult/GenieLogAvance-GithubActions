@@ -5,7 +5,7 @@ on:
       - lab9
       - main
 jobs:
-  build :
+  build-job :
     runs-on: ubuntu-latest
     steps:
     - name : checkout
@@ -17,7 +17,11 @@ jobs:
         pnpm install
         pnpm run build
     - name : artifacts 
-      run : actions/upload-artifact@v3
+      uses : actions/upload-artifact@v3
+      with:
+        name: artifact-build
+        path: dist/
+      
     
   
   
