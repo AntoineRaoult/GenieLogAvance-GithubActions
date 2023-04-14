@@ -58,7 +58,7 @@ jobs:
     - name : download artifact
       uses: actions/download-artifact@v2.1.1
       with : 
-        name : artifact
+        name : artifact-build
         path : $GITHUB_WORKSPACE 
     - name : deploy qa
       uses: Azure/static-web-apps-deploy@v1
