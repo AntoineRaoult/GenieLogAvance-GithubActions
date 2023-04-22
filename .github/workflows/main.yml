@@ -1,5 +1,7 @@
 name: Build Vue
 on: 
+  schedule: 
+    - cron : '0 14 * * 6'
   push :
     branches :
       - lab9
@@ -46,18 +48,18 @@ jobs:
         
         
   test :
-    if: github.event_name == 'pull_request'
+    if: ${{ github.event_name == 'pull_request' || inputs.static_analysis || inputs.static_analysis}}
     name : test
     needs : build
     runs-on: ubuntu-latest
     steps: 
     - name : static analysis
-      if : ${{ inputs.static_analysis == true }}
+      if : ${{ inputs.static_analysis }}
       run : |
         echo "pnpm type-check"
         echo "pnpm eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
     - name : test
-      if : ${{ inputs.tests == true }}
+      if : ${{ inputs.tests }}
       run: |
         echo "pnpm vitest"
         
