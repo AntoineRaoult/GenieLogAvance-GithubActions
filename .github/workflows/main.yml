@@ -7,15 +7,6 @@ on:
       - lab9
       - main
   workflow_dispatch:
-    inputs:
-      static_analysis :
-        description: 'Run static analysis'
-        required: true
-        type: boolean
-      tests:
-        description: 'Run tests'
-        required: true
-        type: boolean
 
 jobs:
   build :
