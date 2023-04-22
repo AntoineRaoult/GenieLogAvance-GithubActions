@@ -1,12 +1,19 @@
 name: Build Vue
 on: 
-  schedule: 
-    - cron : '0 14 * * 6'
   push :
     branches :
       - lab9
       - main
   workflow_dispatch:
+    inputs:
+      static_analysis :
+        description: 'Run static analysis'
+        required: false
+        type: boolean
+      tests:
+        description: 'Run tests'
+        required: false
+        type: boolean
 
 jobs:
   build :
