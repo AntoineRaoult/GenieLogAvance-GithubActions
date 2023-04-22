@@ -1,10 +1,21 @@
 name: Build Vue
 on: 
+  schedule: 
+    - cron : '0 14 * * 6'
   push :
     branches :
       - lab9
       - main
   workflow_dispatch:
+    inputs:
+      static_analysis :
+        description: 'Run static analysis'
+        required: true
+        type: boolean
+      tests:
+        description: 'Run tests'
+        required: true
+        type: boolean
 
 jobs:
   build :
@@ -43,10 +54,12 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
     - name : static analysis
+      if : ${{ inputs.static_analysis == true }}
       run : |
         echo "pnpm type-check"
         echo "pnpm eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
     - name : test
+      if : ${{ inputs.tests == true }}
       run: |
         echo "pnpm vitest"
         
