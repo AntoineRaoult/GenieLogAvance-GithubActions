@@ -37,11 +37,22 @@ jobs:
         pnpm install
         pnpm run build    
         
-    - name : artifacts 
+    - name : artifacts_main
+      if: ${{ github.ref == 'refs/heads/main' }}
       uses : actions/upload-artifact@v3
       with:
         name: artifact-build
         path: dist/
+        retention-days: 7
+        
+    - name : artifacts
+      if: ${{ github.ref != 'refs/heads/main' }}
+      uses : actions/upload-artifact@v3
+      with:
+        name: artifact-build
+        path: dist/
+        retention-days: 1
+        
     - name : cache
       uses: actions/cache/save@v3
       with:
