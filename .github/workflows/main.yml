@@ -45,7 +45,7 @@ jobs:
       - uses: pulumi/actions@v4
         with:
           command: up
-          stack-name: vvr-2048-vue/dev
+          stack-name: teachingiac/vvr-2048-vue/dev
         env:
           PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
