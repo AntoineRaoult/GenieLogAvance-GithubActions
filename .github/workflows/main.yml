@@ -42,7 +42,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: pulumi/actions@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Set node version to 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+      
+      - name : Install dependencies
+        run: pnpm install
+        working-directory: infra
+           
+      - uses: pulumi/actions@v4.2.1
         with:
           command: up
           stack-name: teachingiac/vvr-2048-vue/dev
